@@ -1,0 +1,18 @@
+{
+    "id": "newmembers",
+    "name": "New Members Module",
+    "description": "Adds a panel on the Dashboard and display there the latest joined members.",
+    "keywords": ["new", "members", "widget", "dashboard"],
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Andreas Strobel"
+        }
+    ],
+    "homepage": "https://github.com/humhub/humhub-new-members-module",
+    "license": "AGPL",
+    "time": "2015-06-04",
+    "humhub": {
+        "minVersion": "0.11.2"
+    }
+}
