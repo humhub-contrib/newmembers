@@ -1,5 +1,12 @@
 <?php
 
+namespace humhub\modules\newmembers\controllers;
+
+use Yii;
+use humhub\modules\admin\components\Controller;
+use humhub\modules\newmembers\forms\NewMembersConfigureForm;
+use humhub\models\Setting;
+
 /**
  * Defines the configure actions.
  *
@@ -9,75 +16,28 @@
 class ConfigController extends Controller
 {
 
-    public $subLayout = "application.modules_core.admin.views._layout";
-
-    /**
-     *
-     * @return array action filters
-     */
-    public function filters()
-    {
-        return array(
-            'accessControl'
-        ); // perform access control for CRUD operations
-
-    }
-
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     *
-     * @return array access control rules
-     */
-    public function accessRules()
-    {
-        return array(
-            array(
-                'allow',
-                'expression' => 'Yii::app()->user->isAdmin()'
-            ),
-            array(
-                'deny', // deny all users
-                'users' => array(
-                    '*'
-                )
-            )
-        );
-    }
-
     /**
      * Configuration Action for Super Admins
      */
     public function actionConfig()
     {
-        Yii::import('newmembers.forms.*');
-
         $form = new NewMembersConfigureForm();
+        $form->panelTitle = Setting::Get('panelTitle', 'newmembers');
+        $form->maxMembers = Setting::Get('maxMembers', 'newmembers');
+        $form->fromDate = Setting::Get('fromDate', 'newmembers');
 
-        if (isset($_POST['NewMembersConfigureForm'])) {
-            $_POST['NewMembersConfigureForm'] = Yii::app()->input->stripClean($_POST['NewMembersConfigureForm']);
-            $form->attributes = $_POST['NewMembersConfigureForm'];
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $form->panelTitle = Setting::Set('panelTitle', $form->panelTitle, 'newmembers');
+            $form->maxMembers = Setting::Set('maxMembers', $form->maxMembers, 'newmembers');
+            $form->fromDate = Setting::Set('fromDate', $form->fromDate, 'newmembers');
 
-            if ($form->validate()) {
-                $form->panelTitle = HSetting::Set('panelTitle', $form->panelTitle, 'newmembers');
-                $form->maxMembers = HSetting::Set('maxMembers', $form->maxMembers, 'newmembers');
-                $form->fromDate = HSetting::Set('fromDate', $form->fromDate, 'newmembers');
-                $this->redirect(Yii::app()->createUrl('newmembers/config/config'));
-            }
-        } else {
-            $form->panelTitle = HSetting::Get('panelTitle', 'newmembers');
-            $form->maxMembers = HSetting::Get('maxMembers', 'newmembers');
-            $form->fromDate = HSetting::Get('fromDate', 'newmembers');
+            Yii::$app->getSession()->setFlash('data-saved', Yii::t('AdminModule.controllers_SettingController', 'Saved'));
+            $this->redirect(['/newmembers/config/config']);
         }
 
-        // set flash message
-        Yii::app()->user->setFlash('data-saved', Yii::t('AdminModule.controllers_SettingController', 'Saved'));
-
-        $this->render('config', array(
-            'model' => $form
-        ));
-
+        return $this->render('config', array('model' => $form));
     }
+
 }
 
 ?>

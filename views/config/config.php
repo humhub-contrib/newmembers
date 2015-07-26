@@ -1,16 +1,18 @@
+<?php
+
+use yii\helpers\Url;
+use yii\helpers\Html;
+use humhub\compat\CActiveForm;
+?>
+
 <div class="panel panel-default">
     <div
-        class="panel-heading"><?php echo Yii::t('NewMembersModule.base', '<strong>New Members</strong> Module Configuration'); ?></div>
+        class="panel-heading"><?php echo Yii::t('NewmembersModule.base', '<strong>New Members</strong> Module Configuration'); ?></div>
     <div class="panel-body">
 
         <br>
 
-        <?php
-        $form = $this->beginWidget('CActiveForm', array(
-            'id' => 'new-members-configure-form',
-            'enableAjaxValidation' => false,
-        ));
-        ?>
+        <?php $form = CActiveForm::begin(); ?>
 
         <?php echo $form->errorSummary($model); ?>
 
@@ -22,27 +24,26 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'maxMembers'); ?>
-            <?php echo $form->numberField($model, 'maxMembers', array('class' => 'form-control')); ?>
+            <?php echo $form->textField($model, 'maxMembers', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'maxMembers'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'fromDate'); ?>
-            <?php //echo HHtml::dateTimeField('fromDate', HSetting::Get('maxMembers', 'newmembers'), array('class' => 'form-control', 'id' => 'fromDate')); ?>
             <?php echo $form->textField($model, 'fromDate', array('class' => 'form-control')); ?>
-            <p class="help-block"><?php echo Yii::t('NewMembersModule.base', 'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.'); ?></p>
+            <p class="help-block"><?php echo Yii::t('NewmembersModule.base', 'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.'); ?></p>
             <?php echo $form->error($model, 'fromDate'); ?>
 
         </div>
 
         <hr>
-        <?php echo CHtml::submitButton(Yii::t('NewMembersModule.base', 'Save'), array('class' => 'btn btn-primary')); ?>
+        <?php echo Html::submitButton(Yii::t('NewmembersModule.base', 'Save'), array('class' => 'btn btn-primary')); ?>
         <a class="btn btn-default"
-           href="<?php echo $this->createUrl('//admin/module'); ?>"><?php echo Yii::t('NewMembersModule.base', 'Back to modules'); ?></a>
+           href="<?php echo Url::to(['/admin/module']); ?>"><?php echo Yii::t('NewmembersModule.base', 'Back to modules'); ?></a>
 
         <!-- show flash message after saving -->
-        <?php $this->widget('application.widgets.DataSavedWidget'); ?>
+        <?php echo humhub\widgets\DataSaved::widget(); ?>
 
-        <?php $this->endWidget(); ?>
+        <?php CActiveForm::end(); ?>
     </div>
 </div>

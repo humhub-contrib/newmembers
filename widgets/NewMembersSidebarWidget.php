@@ -1,5 +1,10 @@
 <?php
 
+namespace humhub\modules\newmembers\widgets;
+
+use humhub\models\Setting;
+use humhub\modules\user\models\User;
+
 /**
  * Shows newly registered members as sidebar widget on the dashboard
  *
@@ -7,7 +12,7 @@
  * @since 0.11
  * @author Andreas Strobel
  */
-class NewMembersSidebarWidget extends HWidget
+class NewMembersSidebarWidget extends \humhub\components\Widget
 {
 
     /**
@@ -15,18 +20,27 @@ class NewMembersSidebarWidget extends HWidget
      */
     public function run()
     {
-        $maxMembers = HSetting::Get('maxMembers', 'newmembers');
-        $fromDate = HSetting::Get('fromDate', 'newmembers');
+        $maxMembers = Setting::Get('maxMembers', 'newmembers');
+        $fromDate = Setting::Get('fromDate', 'newmembers');
 
-        if ($fromDate == null || $fromDate == "") {
-            $newMembers = User::model()->active()->recently($maxMembers)->findAll();
-        } else {
-            $newMembers = User::model()->active()->recently($maxMembers)->findAll(array("condition"=>"created_at >= :fromDate", "params" => array(":fromDate" => $fromDate)));
+
+        $newMembersQuery = User::find();
+        $newMembersQuery->limit($maxMembers);
+        $newMembersQuery->andWhere(['user.status' => User::STATUS_ENABLED]);
+        $newMembersQuery->orderBy(['user.created_at' => SORT_DESC]);
+        if ($fromDate != null && $fromDate != "") {
+            $newMembersQuery->andWhere(['>=', 'user.created_at', $fromDate]);
         }
 
-        // Render widgets view
-        $this->render('newMembers', array(
-            'newUsers' => $newMembers
+        $newMembers = $newMembersQuery->all();
+
+        if (count($newMembers) == 0) {
+            return;
+        }
+
+        return $this->render('newMembers', array(
+                    'newUsers' => $newMembers,
+                    'title' => Setting::Get('panelTitle', 'newmembers')
         ));
     }
 
