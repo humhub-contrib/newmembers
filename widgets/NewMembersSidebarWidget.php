@@ -20,7 +20,7 @@ class NewMembersSidebarWidget extends \humhub\components\Widget
      */
     public function run()
     {
-        $maxMembers = Setting::Get('maxMembers', 'newmembers');
+        $maxMembers = (int) Setting::Get('maxMembers', 'newmembers');
         $fromDate = Setting::Get('fromDate', 'newmembers');
 
 

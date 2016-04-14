@@ -7,7 +7,7 @@ use yii\helpers\Html;
     <?php echo \humhub\widgets\PanelMenu::widget(array('id' => 'new-people-panel')); ?>
 
     <div class="panel-heading">
-        <?php echo Html::encode($title); ?>
+        <?php echo $title; ?>
     </div>
     <div class="panel-body">
         <?php foreach ($newUsers as $user) : ?>
