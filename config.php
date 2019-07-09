@@ -6,8 +6,8 @@ return [
     'id' => 'newmembers',
     'class' => 'humhub\modules\newmembers\Module',
     'namespace' => 'humhub\modules\newmembers',
-    'events' => array(
-        array('class' => Sidebar::className(), 'event' => Sidebar::EVENT_INIT, 'callback' => array('humhub\modules\newmembers\Module', 'onSidebarInit')),
-    ),
+    'events' => [
+        ['class' => Sidebar::class, 'event' => Sidebar::EVENT_INIT, 'callback' => ['humhub\modules\newmembers\Module', 'onSidebarInit']],
+    ],
 ];
 ?>
