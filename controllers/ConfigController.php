@@ -35,7 +35,7 @@ class ConfigController extends Controller
             $this->redirect(['/newmembers/config/config']);
         }
 
-        return $this->render('config', array('model' => $form));
+        return $this->render('config', ['model' => $form]);
     }
 
 }
