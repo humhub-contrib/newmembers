@@ -11,7 +11,7 @@ class Module extends \humhub\components\Module
 
     public static function onSidebarInit($event)
     {
-        $event->sender->addWidget(NewMembersSidebarWidget::className(), array(), array('sortOrder' => 300));
+        $event->sender->addWidget(NewMembersSidebarWidget::class, [], ['sortOrder' => 300]);
     }
 
     public function getConfigUrl()
