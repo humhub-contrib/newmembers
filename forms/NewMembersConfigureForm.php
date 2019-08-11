@@ -25,7 +25,7 @@ class NewMembersConfigureForm extends Model
     {
         return [
             'panelTitle' => Yii::t('NewmembersModule.base', 'The panel title for the dashboard widget.'),
-            'maxMembers' => Yii::t('NewmembersModule.base', 'The number of most actice users that will be shown.'),
+            'maxMembers' => Yii::t('NewmembersModule.base', 'The number of most active users that will be shown.'),
             'fromDate' => Yii::t('NewmembersModule.base', 'From which registration date should new users displayed as new?'),
         ];
     }
