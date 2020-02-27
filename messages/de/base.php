@@ -1,6 +1,6 @@
 <?php
 return array (
-  '<strong>New Members</strong> Module Configuration' => '<strong>Neue Benutzer</strong> Modul Konfiguration',
+  '<strong>New Members</strong> Module Configuration' => '<strong>Neue Benutzer</strong> Modul-Konfiguration',
   'Back to modules' => 'Zurück zu den Modulen',
   'From which registration date should new users displayed as new?' => 'Ab welchem Registrier-Datum sollen Benutzer als „neu“ angezeigt werden?',
   'Save' => 'Speichern',
