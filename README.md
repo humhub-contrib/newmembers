@@ -1,2 +1,3 @@
-# humhub-modules-newmembers
-Adds a panel on the Dashboard and display there the latest joined members.
+# New Members Widget
+
+Adds a widget with the most recent members of the network to the Dashboard, allowing your userbase to warmly welcome the new ones.  
