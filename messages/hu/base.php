@@ -6,5 +6,5 @@ return array (
   'Save' => 'Mentés',
   'The number of most active users that will be shown.' => 'A megjelenítendő legaktívabb felhasználók száma.',
   'The panel title for the dashboard widget.' => 'Az irányítópult widget panel címe.',
-  'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.' => 'Erre az értékre a meglévő felhasználók importálása után lehet szükség. Hagyja kiürülni, ha a felhasználói bázisa természetesen növekszik.',
+  'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.' => 'Erre az értékre a meglévő felhasználók importálása után lehet szükség. Hagyd üresen, ha a felhasználói bázisod természetesen növekszik.',
 );
