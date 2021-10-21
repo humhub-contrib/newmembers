@@ -2,9 +2,8 @@
 
 namespace humhub\modules\newmembers;
 
-use yii\helpers\Url;
-use humhub\models\Setting;
 use humhub\modules\newmembers\widgets\NewMembersSidebarWidget;
+use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
@@ -27,16 +26,4 @@ class Module extends \humhub\components\Module
         return Url::to(['/newmembers/config/config']);
     }
 
-    /**
-     * @inerhitdoc
-     */
-    public function enable()
-    {
-        parent::enable();
-        Setting::Set('panelTitle', 'New Members', 'newmembers');
-        Setting::Set('maxMembers', 10, 'newmembers');
-    }
-
 }
-
-?>
