@@ -1,12 +1,16 @@
 <?php
 
+use humhub\modules\user\models\User;
 use humhub\widgets\PanelMenu;
 use yii\helpers\Html;
+
+/* @var string $title */
+/* @var User[] $newUsers */
 ?>
 
 <div class="panel panel-default panel-new-people" id="panel-new-people">
     <?= PanelMenu::widget(['id' => 'panel-new-people']); ?>
-  <div class="panel-heading">
+    <div class="panel-heading">
         <?= $title; ?>
     </div>
     <div class="panel-body">

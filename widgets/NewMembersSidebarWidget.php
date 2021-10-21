@@ -2,7 +2,8 @@
 
 namespace humhub\modules\newmembers\widgets;
 
-use humhub\models\Setting;
+use humhub\components\Widget;
+use humhub\modules\newmembers\forms\NewMembersConfigureForm;
 use humhub\modules\user\models\User;
 
 /**
@@ -12,7 +13,7 @@ use humhub\modules\user\models\User;
  * @since 0.11
  * @author Andreas Strobel
  */
-class NewMembersSidebarWidget extends \humhub\components\Widget
+class NewMembersSidebarWidget extends Widget
 {
 
     /**
@@ -20,30 +21,29 @@ class NewMembersSidebarWidget extends \humhub\components\Widget
      */
     public function run()
     {
-        $maxMembers = (int) Setting::Get('maxMembers', 'newmembers');
-        $fromDate = Setting::Get('fromDate', 'newmembers');
+        $config = new NewMembersConfigureForm();
 
+        if (!$config->isVisible()) {
+            return '';
+        }
 
         $newMembersQuery = User::find();
-        $newMembersQuery->limit($maxMembers);
+        $newMembersQuery->limit($config->maxMembers);
         $newMembersQuery->andWhere(['user.status' => User::STATUS_ENABLED]);
         $newMembersQuery->orderBy(['user.created_at' => SORT_DESC]);
-        if ($fromDate != null && $fromDate != "") {
-            $newMembersQuery->andWhere(['>=', 'user.created_at', $fromDate]);
+        if (!empty($config->fromDate)) {
+            $newMembersQuery->andWhere(['>=', 'user.created_at', $config->fromDate]);
         }
-
         $newMembers = $newMembersQuery->all();
 
-        if (count($newMembers) == 0) {
-            return;
+        if (empty($newMembers)) {
+            return '';
         }
 
-        return $this->render('newMembers', array(
-                    'newUsers' => $newMembers,
-                    'title' => Setting::Get('panelTitle', 'newmembers')
-        ));
+        return $this->render('newMembers', [
+            'newUsers' => $newMembers,
+            'title' => $config->panelTitle,
+        ]);
     }
 
 }
-
-?>
