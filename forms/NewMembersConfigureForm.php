@@ -44,11 +44,11 @@ class NewMembersConfigureForm extends Model
 
         $this->module = Yii::$app->getModule('newmembers');
 
-        $this->panelTitle = $this->module->settings->get('panelTitle', 'New Members');
-        $this->maxMembers = (int) $this->module->settings->get('maxMembers', 10);
+        $this->panelTitle = $this->module->settings->get('panelTitle') ?: Yii::t('NewmembersModule.base', 'New Members');
+        $this->maxMembers = (int)$this->module->settings->get('maxMembers', 10);
         $this->fromDate = $this->module->settings->get('fromDate');
-        $this->displayForMembers = (bool) $this->module->settings->get('displayForMembers', true);
-        $this->displayForGuests = (bool) $this->module->settings->get('displayForGuests', true);
+        $this->displayForMembers = (bool)$this->module->settings->get('displayForMembers', true);
+        $this->displayForGuests = (bool)$this->module->settings->get('displayForGuests', true);
     }
 
     /**
@@ -57,7 +57,8 @@ class NewMembersConfigureForm extends Model
     public function rules()
     {
         return [
-            [['maxMembers', 'panelTitle'], 'required'],
+            [['maxMembers'], 'required'],
+            [['panelTitle'], 'string'],
             ['maxMembers', 'integer', 'min' => '0'],
             ['fromDate', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'],
             [['displayForMembers', 'displayForGuests'], 'boolean'],
