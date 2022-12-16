@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.3  (Unreleased)
+-------------------
+- Enh #11: Allow translation of the default panel title 
+
+
 1.0.2  (October 10, 2021)
 -------------------------
 - Enh #9: New options for widget visibility on dashboard
