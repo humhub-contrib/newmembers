@@ -9,5 +9,6 @@ return [
     'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.' => 'Ova je vrijednost možda potrebna nakon uvoza od postojećih korisnika. Neka se isprazni ako vaša baza korisnika raste prirodno.',
     'For guests' => '',
     'For logged in members' => '',
+    'New Members' => '',
     'Show on dashboard' => '',
 ];

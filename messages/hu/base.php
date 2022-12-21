@@ -9,5 +9,6 @@ return [
     'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.' => 'Erre az értékre a meglévő felhasználók importálása után lehet szükség. Hagyd üresen, ha a felhasználói bázisod természetesen növekszik.',
     'For guests' => '',
     'For logged in members' => '',
+    'New Members' => '',
     'Show on dashboard' => '',
 ];

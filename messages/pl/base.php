@@ -9,5 +9,6 @@ return [
     'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.' => 'Ta wartość może być wymagana po zaimportowaniu z istniejących użytkowników. Pozostaw to pole puste, jeżeli baza użytkowników zwiększa rozmiar naturalnie.',
     'For guests' => '',
     'For logged in members' => '',
+    'New Members' => '',
     'Show on dashboard' => '',
 ];
