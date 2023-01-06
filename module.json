@@ -1,7 +1,7 @@
 {
   "id": "newmembers",
   "name": "New Members Widget",
-  "description": "    \"keywords\": [\"new\", \"members\", \"widget\", \"dashboard\"],\n",
+  "description": "Adds a widget with the most recent members of the network to the Dashboard, allowing your userbase to warmly welcome the new ones.",
   "keywords": [
     "new",
     "members",
@@ -14,7 +14,7 @@
     }
   ],
   "homepage": "https://github.com/humhub-contrib/newmembers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "humhub": {
     "minVersion": "1.4"
   }
