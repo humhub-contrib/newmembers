@@ -7,12 +7,6 @@ use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
-
-    /**
-     * @inerhitdoc
-     */
-    public $resourcesPath = 'resources';
-
     public static function onSidebarInit($event)
     {
         $event->sender->addWidget(NewMembersSidebarWidget::class, [], ['sortOrder' => 300]);
@@ -25,5 +19,4 @@ class Module extends \humhub\components\Module
     {
         return Url::to(['/newmembers/config/config']);
     }
-
 }
