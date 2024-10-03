@@ -14,7 +14,6 @@ use humhub\modules\newmembers\forms\NewMembersConfigureForm;
  */
 class ConfigController extends Controller
 {
-
     /**
      * Configuration Action for Super Admins
      */

@@ -14,7 +14,7 @@
     }
   ],
   "homepage": "https://github.com/humhub-contrib/newmembers",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "humhub": {
     "minVersion": "1.4"
   }

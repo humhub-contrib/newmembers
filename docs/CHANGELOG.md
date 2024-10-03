@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.4  (Unreleased)
+------------------------
+- Enh #13: Use PHP CS Fixer
+- 
 1.0.3  (January 6, 2023)
 ------------------------
 - Enh #11: Allow translation of the default panel title 
