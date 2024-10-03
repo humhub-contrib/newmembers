@@ -7,7 +7,6 @@ use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
-
     /**
      * @inerhitdoc
      */
