@@ -1,9 +1,9 @@
 <?php
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\newmembers\forms\NewMembersConfigureForm;
-use humhub\widgets\Button;
-use yii\bootstrap\ActiveForm;
+use humhub\widgets\bootstrap\Button;
+use humhub\widgets\form\ActiveForm;
 
 /* @var NewMembersConfigureForm $model */
 ?>
@@ -24,7 +24,7 @@ use yii\bootstrap\ActiveForm;
         <hr>
 
         <?= Button::save()->submit() ?>
-        <?= Button::defaultType(Yii::t('NewmembersModule.base', 'Back to modules'))->link(['/admin/module']) ?>
+        <?= Button::light(Yii::t('NewmembersModule.base', 'Back to modules'))->link(['/admin/module']) ?>
 
         <?php ActiveForm::end() ?>
     </div>
