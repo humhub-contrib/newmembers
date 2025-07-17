@@ -20,7 +20,7 @@ use yii\helpers\Html;
                      height="40" width="40" alt="40x40" data-src="holder.js/40x40"
                      style="width: 40px; height: 40px;"
                      data-bs-toggle="tooltip" data-placement="top" title=""
-                     data-original-title="<?= Html::encode($user->displayName); ?>">
+                     data-bs-title="<?= Html::encode($user->displayName); ?>">
             </a>
         <?php endforeach; ?>
     </div>
