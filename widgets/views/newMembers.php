@@ -16,11 +16,11 @@ use yii\helpers\Html;
     <div class="panel-body">
         <?php foreach ($newUsers as $user) : ?>
             <a href="<?= $user->getUrl(); ?>">
-                <img src="<?= $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt img_margin"
+                <img src="<?= $user->getProfileImage()->getUrl(); ?>" class="rounded tt img_margin"
                      height="40" width="40" alt="40x40" data-src="holder.js/40x40"
                      style="width: 40px; height: 40px;"
-                     data-toggle="tooltip" data-placement="top" title=""
-                     data-original-title="<?= Html::encode($user->displayName); ?>">
+                     data-bs-toggle="tooltip" data-placement="top" title=""
+                     data-bs-title="<?= Html::encode($user->displayName); ?>">
             </a>
         <?php endforeach; ?>
     </div>

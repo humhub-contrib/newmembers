@@ -10,4 +10,3 @@ return [
         ['class' => Sidebar::class, 'event' => Sidebar::EVENT_INIT, 'callback' => ['humhub\modules\newmembers\Module', 'onSidebarInit']],
     ],
 ];
-?>

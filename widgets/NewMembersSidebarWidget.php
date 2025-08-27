@@ -15,7 +15,6 @@ use humhub\modules\user\models\User;
  */
 class NewMembersSidebarWidget extends Widget
 {
-
     /**
      * Execute widget
      */
