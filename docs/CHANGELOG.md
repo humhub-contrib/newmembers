@@ -3,7 +3,7 @@ Changelog
 
 1.1.1 (Unreleased)
 -----------------------
-- Fix: Vertical spacing between Profile images in the widget
+- Fix #16: Vertical spacing between Profile images in the widget
 
 1.1.0 (August 27, 2025)
 -----------------------
