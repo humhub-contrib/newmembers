@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.0 (Unreleased)
+-----------------------
+- Fix #17: Update user image
+
 1.1.1 (Unreleased)
 -----------------------
 - Fix #16: Vertical spacing between Profile images in the widget
