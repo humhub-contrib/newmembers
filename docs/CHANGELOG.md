@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.0 (July 31, 2026)
+---------------------
+- Fix #17: Update user image
+
 1.1.1 (July 8, 2026)
 --------------------
 - Fix #16: Vertical spacing between Profile images in the widget
