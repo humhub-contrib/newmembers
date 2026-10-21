@@ -2,6 +2,7 @@
 
 use humhub\helpers\Html;
 use humhub\modules\newmembers\forms\NewMembersConfigureForm;
+use humhub\modules\ui\form\widgets\DatePicker;
 use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ActiveForm;
 
@@ -15,7 +16,9 @@ use humhub\widgets\form\ActiveForm;
 
         <?= $form->field($model, 'panelTitle') ?>
         <?= $form->field($model, 'maxMembers') ?>
-        <?= $form->field($model, 'fromDate') ?>
+        <?= $form->field($model, 'fromDate')->widget(DatePicker::class, [
+            'dateFormat' => Yii::$app->formatter->dateInputFormat,
+        ]) ?>
 
         <?= Html::label(Yii::t('NewmembersModule.base', 'Show on dashboard'), null, ['class' => 'control-label']) ?>
         <?= $form->field($model, 'displayForMembers')->checkbox() ?>

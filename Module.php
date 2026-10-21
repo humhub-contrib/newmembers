@@ -2,18 +2,12 @@
 
 namespace humhub\modules\newmembers;
 
-use humhub\modules\newmembers\widgets\NewMembersSidebarWidget;
 use yii\helpers\Url;
 
 class Module extends \humhub\components\Module
 {
-    public static function onSidebarInit($event)
-    {
-        $event->sender->addWidget(NewMembersSidebarWidget::class, [], ['sortOrder' => 300]);
-    }
-
     /**
-     * @inerhitdoc
+     * @inheritdoc
      */
     public function getConfigUrl()
     {
