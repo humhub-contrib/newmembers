@@ -5,6 +5,7 @@ namespace humhub\modules\newmembers\widgets;
 use humhub\components\Widget;
 use humhub\modules\newmembers\forms\NewMembersConfigureForm;
 use humhub\modules\user\models\User;
+use yii\helpers\HtmlPurifier;
 
 /**
  * Shows newly registered members as sidebar widget on the dashboard
@@ -26,12 +27,12 @@ class NewMembersSidebarWidget extends Widget
             return '';
         }
 
-        $newMembersQuery = User::find();
+        $newMembersQuery = User::find()->visible();
         $newMembersQuery->limit($config->maxMembers);
         $newMembersQuery->andWhere(['user.status' => User::STATUS_ENABLED]);
         $newMembersQuery->orderBy(['user.created_at' => SORT_DESC]);
-        if (!empty($config->fromDate)) {
-            $newMembersQuery->andWhere(['>=', 'user.created_at', $config->fromDate]);
+        if ($config->getSavedFromDate() !== null) {
+            $newMembersQuery->andWhere(['>=', 'user.created_at', $config->getSavedFromDate()]);
         }
         $newMembers = $newMembersQuery->all();
 
@@ -41,8 +42,18 @@ class NewMembersSidebarWidget extends Widget
 
         return $this->render('newMembers', [
             'newUsers' => $newMembers,
-            'title' => $config->panelTitle,
+            'title' => $this->sanitizeTitle($config->panelTitle),
         ]);
     }
 
+    /**
+     * Allows only simple formatting and links in the title, which is entered by an administrator.
+     */
+    private function sanitizeTitle(string $title): string
+    {
+        return HtmlPurifier::process($title, [
+            'HTML.Allowed' => 'strong,b,em,i,u,br,span[class],a[href|title]',
+            'URI.AllowedSchemes' => ['http' => true, 'https' => true],
+        ]);
+    }
 }

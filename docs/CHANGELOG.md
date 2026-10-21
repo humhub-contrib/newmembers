@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.1 (Unreleased)
+------------------
+- Fix #18: Hidden and registered-only users shown in the widget to everyone; Registration date field replaced with a date picker; Panel title not sanitized (simple HTML only); Event handler moved to Events.php; Wrong label and legacy user image markup
+
 1.2.0 (July 31, 2026)
 ---------------------
 - Fix #17: Update user image

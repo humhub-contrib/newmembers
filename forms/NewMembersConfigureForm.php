@@ -2,6 +2,7 @@
 
 namespace humhub\modules\newmembers\forms;
 
+use humhub\libs\DbDateValidator;
 use humhub\modules\newmembers\Module;
 use Yii;
 use yii\base\Model;
@@ -24,7 +25,7 @@ class NewMembersConfigureForm extends Model
     public $maxMembers;
 
     /**
-     * @var string $fromDate
+     * @var string|null $fromDate Date in the input format of the user, converted to the database format on validation
      */
     public $fromDate;
 
@@ -46,7 +47,7 @@ class NewMembersConfigureForm extends Model
 
         $this->panelTitle = $this->module->settings->get('panelTitle') ?: Yii::t('NewmembersModule.base', 'New Members');
         $this->maxMembers = (int)$this->module->settings->get('maxMembers', 10);
-        $this->fromDate = $this->module->settings->get('fromDate');
+        $this->fromDate = $this->formatDateForInput($this->module->settings->get('fromDate'));
         $this->displayForMembers = (bool)$this->module->settings->get('displayForMembers', true);
         $this->displayForGuests = (bool)$this->module->settings->get('displayForGuests', true);
     }
@@ -60,7 +61,7 @@ class NewMembersConfigureForm extends Model
             [['maxMembers'], 'required'],
             [['panelTitle'], 'string'],
             ['maxMembers', 'integer', 'min' => '0'],
-            ['fromDate', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'],
+            ['fromDate', DbDateValidator::class, 'convertToFormat' => 'Y-m-d'],
             [['displayForMembers', 'displayForGuests'], 'boolean'],
         ];
     }
@@ -72,7 +73,7 @@ class NewMembersConfigureForm extends Model
     {
         return [
             'panelTitle' => Yii::t('NewmembersModule.base', 'The panel title for the dashboard widget.'),
-            'maxMembers' => Yii::t('NewmembersModule.base', 'The number of most active users that will be shown.'),
+            'maxMembers' => Yii::t('NewmembersModule.base', 'The number of new users that will be shown.'),
             'fromDate' => Yii::t('NewmembersModule.base', 'From which registration date should new users displayed as new?'),
             'displayForMembers' => Yii::t('NewmembersModule.base', 'For logged in members'),
             'displayForGuests' => Yii::t('NewmembersModule.base', 'For guests'),
@@ -85,6 +86,7 @@ class NewMembersConfigureForm extends Model
     public function attributeHints()
     {
         return [
+            'panelTitle' => Yii::t('NewmembersModule.base', 'Simple HTML is allowed: strong, b, em, i, u, br, span (class) and a (href, title).'),
             'fromDate' => Yii::t('NewmembersModule.base', 'This value is maybe necessary after an import from existing users. Let it empty if your user base grows naturally.'),
         ];
     }
@@ -101,7 +103,31 @@ class NewMembersConfigureForm extends Model
         $this->module->settings->set('displayForMembers', $this->displayForMembers);
         $this->module->settings->set('displayForGuests', $this->displayForGuests);
 
+        // The validator converted the date to the database format, show it again in the input format
+        $this->fromDate = $this->formatDateForInput($this->fromDate);
+
         return true;
+    }
+
+    /**
+     * @return string|null The saved date in the database format
+     */
+    public function getSavedFromDate(): ?string
+    {
+        return $this->module->settings->get('fromDate') ?: null;
+    }
+
+    /**
+     * @param string|null $date Date in the database format (a time part is ignored)
+     * @return string|null Date in the input format of the user
+     */
+    private function formatDateForInput(?string $date): ?string
+    {
+        if (empty($date)) {
+            return null;
+        }
+
+        return Yii::$app->formatter->asDate(substr($date, 0, 10), Yii::$app->formatter->dateInputFormat);
     }
 
     /**
